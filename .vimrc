@@ -63,24 +63,18 @@ map <C-n> :NERDTreeToggle<CR>
 map <leader>d :TernDef<cr>
 map <S-F6> :TernRename<cr>
 map <leader>r :TernRefs<cr>
-map <leader>g :Ack<cr>
 map <leader>l :CtrlPMRU<cr>
 map <leader>q :%!python -m json.tool<cr>
+
+"git shortcuts
+map <leader>gs :Gstatus<cr>
+map <leader>gc :Gcommit<cr>
+map <leader>ga :Gwrite<cr>
+map <leader>gr :Gread<cr>
+map <leader>gb :Gblame<cr>
+
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
-" syntastic settings:
-
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-
 
 "wrokspace settings:
 let g:workspace_autosave_always = 1
