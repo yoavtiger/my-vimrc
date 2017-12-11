@@ -37,6 +37,7 @@ Plugin 'mitermayer/vim-prettier'
 Plugin 'thaerkh/vim-workspace'
 Plugin 'danro/rename.vim'
 Plugin 'w0rp/ale'
+Plugin 'janko-m/vim-test'
 
 " js autocomplete:
 Plugin 'Shougo/deoplete.nvim'
@@ -65,6 +66,8 @@ map <S-F6> :TernRename<cr>
 map <leader>r :TernRefs<cr>
 map <leader>l :CtrlPMRU<cr>
 map <leader>q :%!python -m json.tool<cr>
+" copy file name
+map <leader>% :!echo %:p \| pbcopy <cr>
 
 "git shortcuts
 map <leader>gs :Gstatus<cr>
