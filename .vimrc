@@ -17,7 +17,8 @@ filetype plugin indent on    " required
 set number
 set relativenumber
 set updatetime=250
-
+set vb
+set shell=/bin/bash
 " plugins:
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
@@ -38,6 +39,7 @@ Plugin 'thaerkh/vim-workspace'
 Plugin 'danro/rename.vim'
 Plugin 'w0rp/ale'
 Plugin 'janko-m/vim-test'
+Plugin 'jgdavey/tslime.vim'
 
 " js autocomplete:
 Plugin 'Shougo/deoplete.nvim'
@@ -45,9 +47,15 @@ Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'carlitux/deoplete-ternjs'
+Plugin 'epeli/slimux'
+
+"ts plugins:
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 
 " python
 Plugin 'zchee/deoplete-jedi'
+Plugin 'jmcantrell/vim-virtualenv'
 
 
 
@@ -64,6 +72,7 @@ map <C-n> :NERDTreeToggle<CR>
 map <leader>d :TernDef<cr>
 map <S-F6> :TernRename<cr>
 map <leader>r :TernRefs<cr>
+autocmd FileType typescript map  <leader>d :TsuDefinition
 map <leader>l :CtrlPMRU<cr>
 map <leader>q :%!python -m json.tool<cr>
 " copy file name
@@ -79,6 +88,10 @@ map <leader>gb :Gblame<cr>
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
 
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let test#strategy = "tslime"
 "wrokspace settings:
 let g:workspace_autosave_always = 1
 
@@ -116,7 +129,26 @@ endif
 autocmd FileType markdown setlocal spell
 autocmd FileType js setlocal sw=2 sts=2 et
 autocmd FileType javascript setlocal sw=2 sts=2 et
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+autocmd FileType typescript setlocal sw=2 sts=2 et
 
 "prettier settings:
 let g:prettier#exec_cmd_path = "/Users/yoav/.nvm/versions/node/v6.9.2/bin/prettier"
 let g:prettier#config#trailing_comma = 'es5'
+let g:prettier#config#tab_width = 2
+
+
+command! WebRestart execute "!tmux send-keys -t test-envs:0.0 C-c Up Enter"
+command! CorrRestart execute "!tmux send-keys -t test-envs:0.1 C-c Up Enter"
+command! OrchRestart execute "!tmux send-keys -t test-envs:0.2 C-c Up Enter"
+command! Orch2Restart execute "!tmux send-keys -t test-envs:0.3 C-c Up Enter"
+
+command! Usage execute "Ack require.*%:t:r"
+command! RunDev execute "!sh ~/run-scripts/run-dev-envs.sh"
+command! RunTest execute "!sh ~/run-scripts/run-test-envs.sh"
+command! RunFile execute "!tmux send-keys -t scratch:0.0 C-c node Space % Enter"
+
+let @b = '/ a/*$%A*/'
+let @z = '10@b'
+let @c = '/*B€kbbefxX$%$xx'
+let @x = '10@c'
