@@ -57,7 +57,11 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'zchee/deoplete-jedi'
 Plugin 'jmcantrell/vim-virtualenv'
 
-
+"spaces instead of tabs
+set tabstop=4
+set shiftwidth=4
+set softtabstop=0 
+set expandtab
 
 "enable deoplete
 let g:deoplete#enable_at_startup = 1
